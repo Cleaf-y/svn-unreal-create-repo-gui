@@ -57,6 +57,8 @@
             txtNewRepoName.Name = "txtNewRepoName";
             txtNewRepoName.Size = new Size(414, 23);
             txtNewRepoName.TabIndex = 0;
+            txtNewRepoName.TextChanged += txtNewRepoName_TextChanged;
+            txtNewRepoName.KeyPress += txtNewRepoName_KeyPress;
             // 
             // btnClearName
             // 
@@ -120,10 +122,12 @@
             Controls.Add(btnCreate);
             Controls.Add(btnClearName);
             Controls.Add(groupBox1);
+            KeyPreview = true;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "创建一个新的本地SVN Repo";
             Load += Form1_Load;
+            KeyPress += MainForm_KeyPress;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);

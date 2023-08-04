@@ -13,8 +13,8 @@ namespace svn_unreal_create_repo_gui
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             AddLog("程序启动", 0);
+            txtNewRepoName.ImeMode = System.Windows.Forms.ImeMode.Disable;
         }
 
         private void btnClearName_Click(object sender, EventArgs e)
@@ -98,7 +98,7 @@ namespace svn_unreal_create_repo_gui
             }
         }
 
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void handleCreateRepo()
         {
             if (!CheckInput()) return;
 
@@ -107,16 +107,42 @@ namespace svn_unreal_create_repo_gui
                 Clipboard.SetDataObject($"file:///G:/UnrealBackup/{txtNewRepoName.Text}");
                 string successMsg = $"{txtNewRepoName.Text}创建成功, Repo地址已复制到剪贴板";
                 AddLog(successMsg, 1);
-                if(MessageBox.Show(successMsg+"\n是否退出？", "创建成功", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(successMsg + "\n是否退出？", "创建成功", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     this.Close();
                 }
-                
+
             }
             else
             {
                 AddLog("创建失败", 2);
                 OnError();
+            }
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            handleCreateRepo();
+        }
+
+        private void txtNewRepoName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNewRepoName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                handleCreateRepo();
+            }
+        }
+
+        private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)(Keys.Escape))
+            {
+                this.Close();
             }
         }
     }
