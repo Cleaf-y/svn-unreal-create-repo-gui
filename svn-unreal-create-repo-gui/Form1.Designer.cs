@@ -35,6 +35,8 @@
             btnClearName = new Button();
             btnCreate = new Button();
             listLog = new ListView();
+            TypeAndTime = new ColumnHeader();
+            LogMessage = new ColumnHeader();
             imgState = new ImageList(components);
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -75,19 +77,34 @@
             btnCreate.TabIndex = 2;
             btnCreate.Text = "确认创建";
             btnCreate.UseVisualStyleBackColor = false;
+            btnCreate.Click += btnCreate_Click;
             // 
             // listLog
             // 
+            listLog.Columns.AddRange(new ColumnHeader[] { TypeAndTime, LogMessage });
             listLog.LargeImageList = imgState;
             listLog.Location = new Point(21, 167);
             listLog.Name = "listLog";
-            listLog.Size = new Size(457, 88);
+            listLog.Size = new Size(457, 130);
+            listLog.SmallImageList = imgState;
+            listLog.StateImageList = imgState;
             listLog.TabIndex = 3;
             listLog.UseCompatibleStateImageBehavior = false;
+            listLog.View = View.Details;
+            // 
+            // TypeAndTime
+            // 
+            TypeAndTime.Text = "时间";
+            TypeAndTime.Width = 200;
+            // 
+            // LogMessage
+            // 
+            LogMessage.Text = "内容";
+            LogMessage.Width = 240;
             // 
             // imgState
             // 
-            imgState.ColorDepth = ColorDepth.Depth8Bit;
+            imgState.ColorDepth = ColorDepth.Depth16Bit;
             imgState.ImageStream = (ImageListStreamer)resources.GetObject("imgState.ImageStream");
             imgState.TransparentColor = Color.Transparent;
             imgState.Images.SetKeyName(0, "Info");
@@ -98,12 +115,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(500, 283);
+            ClientSize = new Size(500, 309);
             Controls.Add(listLog);
             Controls.Add(btnCreate);
             Controls.Add(btnClearName);
             Controls.Add(groupBox1);
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "创建一个新的本地SVN Repo";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
@@ -119,5 +137,7 @@
         private TextBox txtNewRepoName;
         private ListView listLog;
         private ImageList imgState;
+        private ColumnHeader TypeAndTime;
+        private ColumnHeader LogMessage;
     }
 }
