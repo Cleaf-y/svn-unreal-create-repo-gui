@@ -87,9 +87,9 @@ namespace svn_unreal_create_repo_gui
                 }
                 OnError();
                 return false;
-             }
-        
-            catch (Exception ex) 
+            }
+
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.StackTrace);
                 AddLog(ex.Message, 2);
@@ -105,8 +105,13 @@ namespace svn_unreal_create_repo_gui
             if (CreateRepo(txtNewRepoName.Text))
             {
                 Clipboard.SetDataObject($"file:///G:/UnrealBackup/{txtNewRepoName.Text}");
-                AddLog($"{txtNewRepoName.Text}创建成功, Repo地址已复制到剪贴板", 1);
-
+                string successMsg = $"{txtNewRepoName.Text}创建成功, Repo地址已复制到剪贴板";
+                AddLog(successMsg, 1);
+                if(MessageBox.Show(successMsg+"\n是否退出？", "创建成功", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    this.Close();
+                }
+                
             }
             else
             {

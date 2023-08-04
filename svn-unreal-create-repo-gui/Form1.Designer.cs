@@ -95,12 +95,12 @@
             // TypeAndTime
             // 
             TypeAndTime.Text = "时间";
-            TypeAndTime.Width = 200;
+            TypeAndTime.Width = 160;
             // 
             // LogMessage
             // 
             LogMessage.Text = "内容";
-            LogMessage.Width = 240;
+            LogMessage.Width = 270;
             // 
             // imgState
             // 
